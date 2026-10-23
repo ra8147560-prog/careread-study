@@ -17,8 +17,8 @@ html,body{margin:0;height:100%;overflow:hidden;background:var(--bg-bottom)}
 body{font-family:var(--f);color:var(--ink);-webkit-font-smoothing:antialiased}
 button{font-family:inherit}
 
-#viewport{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom))}
-#stage{width:1920px;height:1080px;position:relative;transform-origin:center center;
+#viewport{position:fixed;inset:0;overflow:hidden;background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom))}
+#stage{width:1920px;height:1080px;position:absolute;top:0;left:0;transform-origin:0 0;
   background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 100%);overflow:hidden}
 
 .screen{position:absolute;inset:0;display:none}

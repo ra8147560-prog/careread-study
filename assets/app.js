@@ -35,7 +35,8 @@
   /* ---------- scaling ---------- */
   function fit() {
     const s = Math.min(innerWidth / 1920, innerHeight / 1080);
-    stage.style.transform = "scale(" + s + ")";
+    const x = (innerWidth - 1920 * s) / 2, y = (innerHeight - 1080 * s) / 2;
+    stage.style.transform = "translate(" + x + "px," + y + "px) scale(" + s + ")";
   }
   addEventListener("resize", fit); fit();
   if (params.get("aoi") === "1") stage.classList.add("aoi-on");
