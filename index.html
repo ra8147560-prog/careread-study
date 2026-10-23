@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>CareRead Study Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#f2f8fb;--card:#fff;--ink:#1d2a36;--muted:#5f6f7f;--line:#dde7ee;--brand:#0e9384;--brand-soft:#e2f4f1;--sky:#3b8fd9;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Segoe UI",system-ui,sans-serif;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 48px}
+main{max-width:1040px;margin:0 auto;display:grid;gap:22px}
+h1{margin:0;font-size:1.7rem}
+h2{margin:0 0 12px;font-size:1.1rem}
+p{margin:0}
+.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:640px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.88rem;background:#f1f5f8;padding:2px 6px;border-radius:6px}
+a{color:#0b7569;font-weight:500}
+.tag{display:inline-block;font-size:.8rem;padding:2px 10px;border-radius:999px;background:var(--brand-soft);color:#0b7569;font-weight:500}
+ol{margin:0;padding-left:20px;display:grid;gap:6px}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:10px 18px;background:var(--brand);color:#fff;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid rgba(59,143,217,.5);outline-offset:2px}
+#backup-info{margin-top:10px}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="muted">NSTC project · researcher use only</p>
+    <h1>CareRead Study Portal</h1>
+    <p class="muted">3 (Agent Identity) × 2 (Communication Style) lab experiment with eye-tracking. Do not show this page to participants.</p>
+  </header>
+
+  <section class="card">
+    <h2>Condition links</h2>
+    <div class="wrap">
+    <table>
+      <thead><tr><th>Code</th><th>Agent Identity</th><th>Communication Style</th><th>Participant link</th><th>Previews</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag">S1</span></td><td>AI Agent</td><td>Task-Oriented</td><td><a href="s1/">s1/</a></td><td><a href="s1/?lang=en">EN</a> · <a href="s1/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S2</span></td><td>AI-Assisted Physician</td><td>Task-Oriented</td><td><a href="s2/">s2/</a></td><td><a href="s2/?lang=en">EN</a> · <a href="s2/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S3</span></td><td>Physician</td><td>Task-Oriented</td><td><a href="s3/">s3/</a></td><td><a href="s3/?lang=en">EN</a> · <a href="s3/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S4</span></td><td>AI Agent</td><td>Social-Oriented</td><td><a href="s4/">s4/</a></td><td><a href="s4/?lang=en">EN</a> · <a href="s4/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S5</span></td><td>AI-Assisted Physician</td><td>Social-Oriented</td><td><a href="s5/">s5/</a></td><td><a href="s5/?lang=en">EN</a> · <a href="s5/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S6</span></td><td>Physician</td><td>Social-Oriented</td><td><a href="s6/">s6/</a></td><td><a href="s6/?lang=en">EN</a> · <a href="s6/?aoi=1">AOI</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Running a session</h2>
+    <ol>
+      <li>Open the participant link for the assigned condition in Chrome on the 1920 × 1080 lab monitor (or load it as a web stimulus in the eye-tracking software).</li>
+      <li>Enter the participant ID and press Start. The page switches to full screen.</li>
+      <li>Calibrate the eye tracker, then hand over. The flow is: scenario → fixation cross → report → fixation cross → consultation (typing, then reply) → decision.</li>
+      <li>Each screen sets its own address marker (<code>#scenario</code>, <code>#report</code>, <code>#consult-reply</code>…) for segmenting recordings.</li>
+      <li>After the decision, the data are sent to Google Sheets and the participant is taken to the Google Form.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Backup data on this computer</h2>
+    <p class="muted">Every session is also stored in this browser. Download the backup at the end of each lab day.</p>
+    <div id="backup-info" class="muted"></div>
+    <p style="margin-top:12px"><button id="dl">Download backup CSV</button></p>
+  </section>
+</main>
+<script>
+(function(){
+  var rows = [];
+  try { rows = JSON.parse(localStorage.getItem("careread_records") || "[]"); } catch (e) { rows = []; }
+  var sent = rows.filter(function(r){ return r.uploadStatus === "sent"; }).length;
+  document.getElementById("backup-info").textContent = rows.length + " session(s) stored on this computer, " + sent + " confirmed sent to Google Sheets.";
+  document.getElementById("dl").onclick = function(){
+    if (!rows.length) { document.getElementById("backup-info").textContent = "No sessions stored on this computer yet."; return; }
+    var keys = Object.keys(rows[0]);
+    var esc = function(v){ v = v == null ? "" : String(v); return '"' + v.replace(/"/g, '""') + '"'; };
+    var csv = [keys.join(",")].concat(rows.map(function(r){ return keys.map(function(k){ return esc(r[k]); }).join(","); })).join("\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿" + csv], {type: "text/csv"}));
+    a.download = "careread_backup_" + new Date().toISOString().slice(0,10) + ".csv";
+    a.click();
+  };
+})();
+</script>
+</body>
+</html>
