@@ -1,6 +1,6 @@
 /*
   CareRead study configuration.
-  Fill in the three values below after setting up Google Sheets and Google Forms
+  Fill in the four links below after setting up Google Sheets and Google Forms
   (see README.md). Leave them empty to test the site without saving data.
 */
 window.CAREREAD_CONFIG = {
@@ -14,11 +14,13 @@ window.CAREREAD_CONFIG = {
   formEntryParticipant: "",
   formEntryCondition: "",
 
-  // Timing (seconds)
-  minScenarioSeconds: 8,     // Continue button unlocks after this
-  minReportSeconds: 10,      // Continue button unlocks after this
-  fixationSeconds: 2,        // fixation cross before report and before consultation (pupil baseline)
-  typingSeconds: 3,          // "is typing" indicator before the reply appears
-  decisionUnlockSeconds: 5,  // decision buttons unlock this long after the reply appears
-  redirectSeconds: 4         // delay before opening the questionnaire
+  // Timing (seconds). Buttons unlock only after these minimum reading times.
+  minScenarioSeconds: 10,     // scenario screen
+  minReportSeconds: 12,       // report-only screen
+  fixationSeconds: 2,         // fixation crosses (pupil baseline)
+  advisorSeconds: 6,          // advisor introduction screen
+  typingSeconds: 3,           // typing / drafting / reviewing status before each reply
+  minReplySeconds: 8,         // replies 1 and 2, before the next question can be sent
+  decisionUnlockSeconds: 8,   // reply 3, before the decision buttons unlock
+  redirectSeconds: 4          // delay before opening the questionnaire
 };

@@ -7,27 +7,35 @@
 <title>CareRead Study Portal</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
-:root{--bg:#f2f8fb;--card:#fff;--ink:#1d2a36;--muted:#5f6f7f;--line:#dde7ee;--brand:#0e9384;--brand-soft:#e2f4f1;--sky:#3b8fd9;color-scheme:light}
+:root{--bg:#f2f8fb;--card:#fff;--ink:#1d2a36;--muted:#5f6f7f;--line:#dde7ee;--brand:#0e9384;--brand-soft:#e2f4f1;--sky:#3b8fd9;--flag:#d9534f;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","Segoe UI",system-ui,sans-serif;line-height:1.55;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 48px}
-main{max-width:1040px;margin:0 auto;display:grid;gap:22px}
+main{max-width:1080px;margin:0 auto;display:grid;gap:22px}
 h1{margin:0;font-size:1.7rem}
 h2{margin:0 0 12px;font-size:1.1rem}
 p{margin:0}
 .muted{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
 .wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:640px}
-th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:620px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-code{font-family:ui-monospace,Menlo,monospace;font-size:.88rem;background:#f1f5f8;padding:2px 6px;border-radius:6px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.86rem;background:#f1f5f8;padding:2px 6px;border-radius:6px}
 a{color:#0b7569;font-weight:500}
 .tag{display:inline-block;font-size:.8rem;padding:2px 10px;border-radius:999px;background:var(--brand-soft);color:#0b7569;font-weight:500}
-ol{margin:0;padding-left:20px;display:grid;gap:6px}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px}
 button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:10px 18px;background:var(--brand);color:#fff;cursor:pointer}
-button:focus-visible,a:focus-visible{outline:3px solid rgba(59,143,217,.5);outline-offset:2px}
-#backup-info{margin-top:10px}
+button.ghost{background:#fff;color:#0b7569;border:2px solid var(--brand)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid rgba(59,143,217,.5);outline-offset:2px}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:6px 0 14px}
+.controls label{display:grid;gap:4px;font-size:.85rem;color:var(--muted)}
+.controls input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:10px;width:120px}
+.warn{border-left:4px solid var(--flag);padding-left:12px}
+.counts{margin-top:10px;font-size:.9rem}
+#sched-wrap{max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:6px}
+#sched-wrap table{min-width:520px}
+#sched-wrap th{position:sticky;top:0;background:#fff}
 </style>
 </head>
 <body>
@@ -35,7 +43,7 @@ button:focus-visible,a:focus-visible{outline:3px solid rgba(59,143,217,.5);outli
   <header>
     <p class="muted">NSTC project · researcher use only</p>
     <h1>CareRead Study Portal</h1>
-    <p class="muted">3 (Agent Identity) × 2 (Communication Style) lab experiment with eye-tracking. Do not show this page to participants.</p>
+    <p class="muted">Study 1: 3 (Agent Identity) × 2 (Communication Style) lab experiment with eye-tracking. Do not show this page to participants.</p>
   </header>
 
   <section class="card">
@@ -47,47 +55,127 @@ button:focus-visible,a:focus-visible{outline:3px solid rgba(59,143,217,.5);outli
         <tr><td><span class="tag">S1</span></td><td>AI Agent</td><td>Task-Oriented</td><td><a href="s1/">s1/</a></td><td><a href="s1/?lang=en">EN</a> · <a href="s1/?aoi=1">AOI</a></td></tr>
         <tr><td><span class="tag">S2</span></td><td>AI-Assisted Physician</td><td>Task-Oriented</td><td><a href="s2/">s2/</a></td><td><a href="s2/?lang=en">EN</a> · <a href="s2/?aoi=1">AOI</a></td></tr>
         <tr><td><span class="tag">S3</span></td><td>Physician</td><td>Task-Oriented</td><td><a href="s3/">s3/</a></td><td><a href="s3/?lang=en">EN</a> · <a href="s3/?aoi=1">AOI</a></td></tr>
-        <tr><td><span class="tag">S4</span></td><td>AI Agent</td><td>Social-Oriented</td><td><a href="s4/">s4/</a></td><td><a href="s4/?lang=en">EN</a> · <a href="s4/?aoi=1">AOI</a></td></tr>
-        <tr><td><span class="tag">S5</span></td><td>AI-Assisted Physician</td><td>Social-Oriented</td><td><a href="s5/">s5/</a></td><td><a href="s5/?lang=en">EN</a> · <a href="s5/?aoi=1">AOI</a></td></tr>
-        <tr><td><span class="tag">S6</span></td><td>Physician</td><td>Social-Oriented</td><td><a href="s6/">s6/</a></td><td><a href="s6/?lang=en">EN</a> · <a href="s6/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S4</span></td><td>AI Agent</td><td>Social-Oriented (emoji)</td><td><a href="s4/">s4/</a></td><td><a href="s4/?lang=en">EN</a> · <a href="s4/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S5</span></td><td>AI-Assisted Physician</td><td>Social-Oriented (emoji)</td><td><a href="s5/">s5/</a></td><td><a href="s5/?lang=en">EN</a> · <a href="s5/?aoi=1">AOI</a></td></tr>
+        <tr><td><span class="tag">S6</span></td><td>Physician</td><td>Social-Oriented (emoji)</td><td><a href="s6/">s6/</a></td><td><a href="s6/?lang=en">EN</a> · <a href="s6/?aoi=1">AOI</a></td></tr>
       </tbody>
     </table>
     </div>
   </section>
 
   <section class="card">
+    <h2>Random assignment schedule</h2>
+    <p class="muted">Balanced block randomization: every block of six participants contains each condition once, in random order. The same seed always gives the same schedule, so print it once and follow it in order. Each link already fills in the participant ID.</p>
+    <div class="controls">
+      <label>Participants<input id="n" type="number" min="6" step="6" value="180"></label>
+      <label>First ID number<input id="first" type="number" min="1" value="1"></label>
+      <label>Seed<input id="seed" type="number" value="2026"></label>
+      <button id="gen">Generate</button>
+      <button id="csv" class="ghost">Download CSV</button>
+    </div>
+    <div id="sched-wrap"><table><thead><tr><th>Participant</th><th>Block</th><th>Condition</th><th>Link</th></tr></thead><tbody id="sched"></tbody></table></div>
+    <p class="counts muted" id="counts"></p>
+  </section>
+
+  <section class="card">
     <h2>Running a session</h2>
     <ol>
-      <li>Open the participant link for the assigned condition in Chrome on the 1920 × 1080 lab monitor (or load it as a web stimulus in the eye-tracking software).</li>
-      <li>Enter the participant ID and press Start. The page switches to full screen.</li>
-      <li>Calibrate the eye tracker, then hand over. The flow is: scenario → fixation cross → report → fixation cross → consultation (typing, then reply) → decision.</li>
-      <li>Each screen sets its own address marker (<code>#scenario</code>, <code>#report</code>, <code>#consult-reply</code>…) for segmenting recordings.</li>
-      <li>After the decision, the data are sent to Google Sheets and the participant is taken to the Google Form.</li>
+      <li>Open the scheduled link in Chrome on the 1920 × 1080 lab monitor at 100% zoom. Press Start; the page switches to full screen.</li>
+      <li>Calibrate the eye tracker, then hand over. Flow: scenario → fixation cross → report → fixation cross → advisor introduction → chat 1 → chat 2 → chat 3 and decision → questionnaire.</li>
+      <li>Each screen sets an address marker for segmenting recordings: <code>#scenario</code>, <code>#report</code>, <code>#advisor</code>, <code>#t1-typing</code>, <code>#t1</code>, <code>#t2</code>, <code>#t3</code>, <code>#t3-decision</code>, <code>#done</code>.</li>
+      <li>Data (decision, times, screen log, AOI positions) go to Google Sheets; the participant is then taken to the questionnaire.</li>
     </ol>
+  </section>
+
+  <section class="card">
+    <h2>Verification probes (identical in all six conditions)</h2>
+    <div class="wrap">
+    <table>
+      <thead><tr><th>Probe</th><th>Where</th><th>Advisor says</th><th>Report shows</th><th>Gaze evidence of checking</th></tr></thead>
+      <tbody>
+        <tr><td>P1 (minor)</td><td>Chat 1</td><td>LDL 121</td><td>LDL 112</td><td>PROBE-P1 → AOI-R-LDL</td></tr>
+        <tr><td>P2 (critical)</td><td>Chat 2, repeated in chat 3</td><td>HbA1c 6.2%, fasting glucose 118 → prediabetes, no doctor visit, recheck in 6 months</td><td>HbA1c 7.2%, fasting glucose 138 (both flagged high, follow-up advised)</td><td>PROBE-P2 → AOI-R-A1C / AOI-R-GLU</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="warn" style="margin-top:14px">Debriefing is required: tell every participant that the advisor, clinic and patient are fictional, that the advice contained a deliberate error (an HbA1c of 7.2% and a fasting glucose of 138 mg/dL are in the diabetes range and call for a doctor's visit), and why the deception was needed.</p>
+  </section>
+
+  <section class="card">
+    <h2>Areas of interest</h2>
+    <p class="muted" style="margin-bottom:10px">Open any condition with <code>?aoi=1</code> to see the outlines. Exact rectangles (x, y, width, height in screen pixels at 1920 × 1080) are saved for every screen in the <code>aoiMap</code> column.</p>
+    <div class="wrap">
+    <table>
+      <thead><tr><th>AOI</th><th>Content</th><th>Model link</th></tr></thead>
+      <tbody>
+        <tr><td><code>AOI-IN-AV</code>, <code>AOI-IN-NAME</code>, <code>AOI-IN-BIO</code>, <code>AOI-IN-FLOW</code></td><td>Advisor introduction: avatar, name and role, description, reply workflow</td><td>Agent Identity exposure</td></tr>
+        <tr><td><code>AOI-IN-GREET</code></td><td>Advisor greeting</td><td>Communication Style exposure</td></tr>
+        <tr><td><code>AOI-ID</code>, <code>AOI-ID-MSG</code></td><td>Advisor header and avatar next to each reply</td><td>Agent Identity</td></tr>
+        <tr><td><code>AOI-TAG</code></td><td>Attribution line under each reply (AI generated / AI drafted and reviewed / written by Dr. Chen)</td><td>Agent Identity, disclosure</td></tr>
+        <tr><td><code>AOI-STY1</code>, <code>AOI-STY2</code></td><td>First and last line of each reply: neutral (task) or warm with emoji (social), same position and length</td><td>Communication Style, Human-Like Empathy, affect-based route</td></tr>
+        <tr><td><code>AOI-INFO</code></td><td>Values and reference ranges</td><td>Explainability, Intelligence Level, cognition-based route</td></tr>
+        <tr><td><code>AOI-PLAN</code></td><td>Conclusion and advice</td><td>Uniqueness Consideration, Reliance</td></tr>
+        <tr><td><code>PROBE-P1-n</code>, <code>PROBE-P2-n</code></td><td>The misquoted numbers inside AOI-INFO</td><td>Verification</td></tr>
+        <tr><td><code>AOI-R-GLU</code>, <code>AOI-R-A1C</code>, <code>AOI-R-LDL</code>, other <code>AOI-R-*</code> rows, <code>AOI-R-NOTE</code></td><td>Report rows and clinic note</td><td>Verification targets</td></tr>
+        <tr><td><code>AOI-Q</code>, <code>AOI-NEXT</code>, <code>AOI-DEC</code></td><td>Question, next-question button, decision bar</td><td>Navigation, decision</td></tr>
+      </tbody>
+    </table>
+    </div>
   </section>
 
   <section class="card">
     <h2>Backup data on this computer</h2>
     <p class="muted">Every session is also stored in this browser. Download the backup at the end of each lab day.</p>
-    <div id="backup-info" class="muted"></div>
+    <div id="backup-info" class="muted" style="margin-top:10px"></div>
     <p style="margin-top:12px"><button id="dl">Download backup CSV</button></p>
   </section>
 </main>
 <script>
 (function(){
+  var CONDS = ["s1","s2","s3","s4","s5","s6"];
+  var NAMES = {s1:"AI Agent · Task",s2:"AI-Assisted Physician · Task",s3:"Physician · Task",s4:"AI Agent · Social",s5:"AI-Assisted Physician · Social",s6:"Physician · Social"};
+  var esc = function(v){ v = v == null ? "" : String(v); return '"' + v.replace(/"/g, '""') + '"'; };
+  function download(name, rows){
+    var keys = Object.keys(rows[0]);
+    var csv = [keys.join(",")].concat(rows.map(function(r){ return keys.map(function(k){ return esc(r[k]); }).join(","); })).join("\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿" + csv], {type: "text/csv"}));
+    a.download = name; a.click();
+  }
+  /* seeded random numbers (mulberry32) */
+  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var schedule = [];
+  function gen(){
+    var n = Math.max(6, Math.ceil((+document.getElementById("n").value || 180) / 6) * 6);
+    var first = +document.getElementById("first").value || 1;
+    var r = rng(+document.getElementById("seed").value || 2026);
+    var base = location.href.replace(/[#?].*$/, "").replace(/index\.html$/, "");
+    schedule = [];
+    for (var b = 0; b < n / 6; b++) {
+      var blk = CONDS.slice();
+      for (var i = blk.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var t = blk[i]; blk[i] = blk[j]; blk[j] = t; }
+      blk.forEach(function(c){
+        var id = "P" + String(first + schedule.length).padStart(3, "0");
+        schedule.push({participant: id, block: b + 1, condition: c.toUpperCase(), description: NAMES[c], link: base + c + "/?pid=" + id});
+      });
+    }
+    document.getElementById("sched").innerHTML = schedule.map(function(s){
+      return "<tr><td>" + s.participant + "</td><td>" + s.block + "</td><td><span class='tag'>" + s.condition + "</span> " + s.description +
+        "</td><td><a href='" + s.link + "'>open</a></td></tr>"; }).join("");
+    var c = {}; schedule.forEach(function(s){ c[s.condition] = (c[s.condition] || 0) + 1; });
+    document.getElementById("counts").textContent = schedule.length + " participants · " + Object.keys(c).sort().map(function(k){ return k + ": " + c[k]; }).join(" · ");
+  }
+  document.getElementById("gen").onclick = gen;
+  document.getElementById("csv").onclick = function(){ if (!schedule.length) gen(); download("careread_schedule_seed" + document.getElementById("seed").value + ".csv", schedule); };
+  gen();
+
   var rows = [];
   try { rows = JSON.parse(localStorage.getItem("careread_records") || "[]"); } catch (e) { rows = []; }
   var sent = rows.filter(function(r){ return r.uploadStatus === "sent"; }).length;
   document.getElementById("backup-info").textContent = rows.length + " session(s) stored on this computer, " + sent + " confirmed sent to Google Sheets.";
   document.getElementById("dl").onclick = function(){
     if (!rows.length) { document.getElementById("backup-info").textContent = "No sessions stored on this computer yet."; return; }
-    var keys = Object.keys(rows[0]);
-    var esc = function(v){ v = v == null ? "" : String(v); return '"' + v.replace(/"/g, '""') + '"'; };
-    var csv = [keys.join(",")].concat(rows.map(function(r){ return keys.map(function(k){ return esc(r[k]); }).join(","); })).join("\n");
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob(["﻿" + csv], {type: "text/csv"}));
-    a.download = "careread_backup_" + new Date().toISOString().slice(0,10) + ".csv";
-    a.click();
+    download("careread_backup_" + new Date().toISOString().slice(0,10) + ".csv", rows);
   };
 })();
 </script>

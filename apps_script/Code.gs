@@ -7,8 +7,8 @@ const SHEET_NAME = "responses";
 const COLUMNS = [
   "receivedAt", "sessionId", "participantId", "condition", "identity", "style", "lang",
   "startedAt", "finishedAt", "decision", "decisionTimeMs",
-  "scenarioMs", "reportMs", "consultTypingMs", "consultReplyMs",
-  "screen", "viewport", "userAgent", "screenLog"
+  "scenarioMs", "reportMs", "advisorMs", "t1Ms", "t2Ms", "t3Ms",
+  "screen", "viewport", "userAgent", "screenLog", "aoiMap"
 ];
 
 function doPost(e) {
